@@ -13,9 +13,6 @@ const connectDatabase = () => {
         `[app] database name: ${data.connection.name} \n[app] mongo db connected with server: ${data.connection.host}:${data.connection.port}`
       );
     })
-    .catch((err) => {
-      console.log("ERROR: ", err);
-    });
 };
 
 module.exports = connectDatabase;
