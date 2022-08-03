@@ -13,7 +13,8 @@ const productScema = new mongoose.Schema({
   price: {
     type: Number,
     required: [true, "please enter price"],
-    max: [8, "price cannot exceed  8 characters"],
+    // for number min max means value rather than length in string
+    max: [10000000, "price cannot exceed  10000000 characters"],
   },
   rating: {
     type: Number,
