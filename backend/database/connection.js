@@ -13,6 +13,7 @@ const connectDatabase = () => {
         `[app] database name: ${data.connection.name} \n[app] mongo db connected with server: ${data.connection.host}:${data.connection.port}`
       );
     })
+    mongoose.set('debug', true);
 };
 
 module.exports = connectDatabase;
