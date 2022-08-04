@@ -23,6 +23,13 @@
 								"api",
 								"v1",
 								"products"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "new",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -35,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"product2\",\n    \"price\": 200,\n    \"description\": \"this is a sample product\",\n    \"category\": \"book\",\n    \"images\": {\n        \"public_id\": \"sample image\",\n        \"url\": \"sampleUrl\"\n    }\n}",
+							"raw": "{\n    \"name\": \"new name 1\",\n    \"description\": \"test description\",\n    \"category\": \"laptop\",\n    \"price\": 1200 \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,9 +93,9 @@
 					"response": []
 				},
 				{
-					"name": "update product Copy",
+					"name": "delete product",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -100,7 +107,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/products/62e95e88da5831937bb1a53d",
+							"raw": "{{host}}/api/v1/products/62e95faa6d889f39e8b2fe6b",
 							"host": [
 								"{{host}}"
 							],
@@ -108,7 +115,39 @@
 								"api",
 								"v1",
 								"products",
-								"62e95e88da5831937bb1a53d"
+								"62e95faa6d889f39e8b2fe6b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new name 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/products/62e95faa6d889f39e8b2fe6b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"62e95faa6d889f39e8b2fe6b"
 							]
 						}
 					},
