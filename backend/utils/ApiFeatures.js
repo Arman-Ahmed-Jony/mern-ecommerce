@@ -1,3 +1,5 @@
+const { get } = require("mongoose");
+
 /**
  * @class ApiFeature
  * @constructor takes two params
@@ -12,6 +14,10 @@ class ApiFeatures {
     this.queryString = queryString;
   }
 
+  /**
+   * @method search for product searching using keyword available in name
+   * @returns Mongoose query object
+   */
   search() {
     const keyword = this.queryString.keyword
       ? {
@@ -22,6 +28,32 @@ class ApiFeatures {
         }
       : {};
     this.query = this.query.find(keyword);
+    return this;
+  }
+
+  filter() {
+    let queryString = { ...this.queryString };
+    // removing some fields which are not needed to filter
+    const removeFields = ["keyword", "page", "limit"];
+    removeFields.forEach((key) => delete queryString[key]);
+
+    // filter for price and rating range
+    // adding $ in key for mongoose query like {"price":{"gt":"12000"}} => {"price":{"$gt":"12000"}}
+    queryString = JSON.stringify(queryString);
+    queryString = queryString.replace(
+      /\b(gt|gte|lt|lte)\b/g,
+      (key) => `$${key}`
+    );
+
+    queryString = JSON.parse(queryString);
+    this.query = this.query.find(queryString);
+    return this;
+  }
+
+  pagination(resultPerPage) {
+    const currentPage = Number(this.queryString.page) || 1;
+    const skip = currentPage * (resultPerPage - 1);
+
     return this;
   }
 }
