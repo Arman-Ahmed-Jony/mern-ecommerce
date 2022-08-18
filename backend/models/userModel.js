@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
+const bcryptjs = require("bcryptjs");
 const validator = require("validator");
+const user = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "please enter your name"],
-    max: [30, "name cannot exceed 30 characters"],
-    min: [4, "name should be more than 4 character"],
+    maxlenght: [30, "name cannot exceed 30 characters"],
+    minlength: [4, "name should be more than 4 character"],
   },
   email: {
     type: String,
@@ -17,7 +19,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "please enter your password"],
-    min: [8, "password should be greater than 8 character"],
+    minlength: [8, "password should be greater than 8 character"],
     select: false,
   },
   avatar: {
@@ -38,5 +40,12 @@ const userSchema = new mongoose.Schema({
   resetPasswordExpire: Date,
 });
 
+// this hook will be called while saving and updating
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+  this.password = await bcryptjs.hash(this.password, 10);
+});
 
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoose.model("User", userSchema);
