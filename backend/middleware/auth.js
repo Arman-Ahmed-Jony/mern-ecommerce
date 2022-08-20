@@ -20,7 +20,7 @@ exports.authorizeRoles = function (...roles) {
       return next(
         new ErrorHandler(
           403,
-          `Role: ${user.role} is not allowed to access this resource`
+          `Role: ${req.user.role} is not allowed to access this resource`
         )
       );
     }

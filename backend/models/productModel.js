@@ -62,6 +62,12 @@ const productScema = new mongoose.Schema({
       },
     },
   ],
+  // adding user that have created product
+  createdBy: {
+    type:mongoose.Schema.ObjectId,
+    ref: "user",
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now,

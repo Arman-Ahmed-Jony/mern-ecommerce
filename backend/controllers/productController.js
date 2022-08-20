@@ -5,6 +5,9 @@ const ApiFeatures = require("../utils/ApiFeatures");
 
 // create product -- admin
 exports.createProduct = catchAsyncFunction(async (req, res) => {
+  // adding created by user before saving, logged in user has user in the request body
+  // * note: we can use req.user.id or req.user._id
+  req.body.createdBy = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,
@@ -14,7 +17,7 @@ exports.createProduct = catchAsyncFunction(async (req, res) => {
 
 // get all product
 exports.getAllProducts = catchAsyncFunction(async (req, res) => {
-  const total = await Product.countDocuments()
+  const total = await Product.countDocuments();
   const resultPerPage = Number(req.query.resultPerPage) || 5;
   const currentPage = Number(req.query.page) || 1;
   const apiFeature = new ApiFeatures(Product.find(), req.query)
@@ -22,7 +25,9 @@ exports.getAllProducts = catchAsyncFunction(async (req, res) => {
     .filter()
     .pagination(resultPerPage, currentPage);
   const products = await apiFeature.query;
-  res.status(200).json({ success: true, products, resultPerPage, currentPage, total });
+  res
+    .status(200)
+    .json({ success: true, products, resultPerPage, currentPage, total });
 });
 
 // get product details
