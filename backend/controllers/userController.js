@@ -95,8 +95,10 @@ exports.forgotPassword = catchAsyncFunction(async (req, res, next) => {
 });
 
 /**
+ * @controller resetPassword: to reset the password with a reset password token password and confirmPassword
  * @method resetPassword
- * * note: reqest has body fields confirmPassword, password
+ * @requestBody {String} confirmPassword, {String} password
+ * @requestParam {String} token : the password token hash
  */
 exports.resetPassword = catchAsyncFunction(async (req, res, next) => {
   // creating token hash
