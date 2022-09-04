@@ -185,7 +185,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"arman\",\n    \"email\": \"adf13f@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"name\": \"arman\",\n    \"email\": \"ada@gmail.com\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -213,7 +213,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"adf13f@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"email\": \"armanahmedjony@gmail.com\",\n    \"password\": \"sadia123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,6 +260,65 @@
 								"api",
 								"v1",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"armanahmedjony@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/password/forgot",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"password",
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"armanahmedjony@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/password/reset/cbf33f65c8589941a9934a66574d53bf66a705ca",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"password",
+								"reset",
+								"cbf33f65c8589941a9934a66574d53bf66a705ca"
 							]
 						}
 					},
