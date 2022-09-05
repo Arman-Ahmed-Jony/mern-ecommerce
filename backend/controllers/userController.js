@@ -128,3 +128,16 @@ exports.resetPassword = catchAsyncFunction(async (req, res, next) => {
 
   sendJWTToken(200, user, res);
 });
+
+// get user details
+exports.getUserDetails = catchAsyncFunction(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new ErrorHandler(400, "user not found"));
+  }
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
