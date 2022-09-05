@@ -141,3 +141,28 @@ exports.getUserDetails = catchAsyncFunction(async (req, res, next) => {
     user,
   });
 });
+
+// change password or update password
+/**
+ * @controller changePassowrd: to change password or update password with a oldPassword, newPassword and confirmPassword
+ * @method changePassowrd
+ * @requestBody {String} confirmPassword, {String} oldPassword, {String} newPassword
+ */
+exports.changePassword = catchAsyncFunction(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+
+  if (!user) {
+    return next(new ErrorHandler(400, "user not found"));
+  }
+  if (req.body.newPassword !== req.body.confirmPassword) {
+    return next(new ErrorHandler(400, "confirm password does not matched"));
+  }
+
+  const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
+  if (!isPasswordMatched)
+    return next(new ErrorHandler(401, "invalid email or password"));
+
+  user.password = req.body.newPassword;
+  await user.save();
+  sendJWTToken(200, user, res);
+});
