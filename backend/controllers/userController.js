@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 const sendJWTToken = require("../utils/sendJWTToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const { removeEmptyValue } = require("../utils/utilities");
 
 /**
  * @name registerUser
@@ -165,4 +166,27 @@ exports.changePassword = catchAsyncFunction(async (req, res, next) => {
   user.password = req.body.newPassword;
   await user.save();
   sendJWTToken(200, user, res);
+});
+
+/**
+ * @method update  my(user) data
+ * @requestBody {String} name, email
+ */
+exports.updateUser = catchAsyncFunction(async (req, res, next) => {
+  const data = removeEmptyValue({
+    name: req.body.name,
+    email: req.body.email,
+  });
+  // todo: will add avatar support with cloudinary
+
+  const user = await User.findByIdAndUpdate(req.user.id, data, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
 });
