@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const connectDatabase = () => {
   mongoose
@@ -9,11 +9,11 @@ const connectDatabase = () => {
     })
     .then((data) => {
       console.log(
-        "\x1b[36m%s\x1b[0m",
+        '\x1b[36m%s\x1b[0m',
         `[app] database name: ${data.connection.name} \n[app] mongo db connected with server: ${data.connection.host}:${data.connection.port}`
-      );
+      )
     })
-    mongoose.set('debug', true);
-};
+  mongoose.set('debug', true)
+}
 
-module.exports = connectDatabase;
+module.exports = connectDatabase

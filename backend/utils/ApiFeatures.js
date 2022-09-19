@@ -1,5 +1,3 @@
-const { get } = require("mongoose");
-
 /**
  * @class ApiFeature
  * @constructor takes two params
@@ -10,8 +8,8 @@ const { get } = require("mongoose");
  */
 class ApiFeatures {
   constructor(query, queryString) {
-    this.query = query;
-    this.queryString = queryString;
+    this.query = query
+    this.queryString = queryString
   }
 
   /**
@@ -23,38 +21,38 @@ class ApiFeatures {
       ? {
           name: {
             $regex: this.queryString.keyword,
-            $options: "i", // i stands for case insinsitive
+            $options: 'i', // i stands for case insinsitive
           },
         }
-      : {};
-    this.query = this.query.find(keyword);
-    return this;
+      : {}
+    this.query = this.query.find(keyword)
+    return this
   }
 
   filter() {
-    let queryString = { ...this.queryString };
+    let queryString = { ...this.queryString }
     // removing some fields which are not needed to filter
-    const removeFields = ["keyword", "page", "limit"];
-    removeFields.forEach((key) => delete queryString[key]);
+    const removeFields = ['keyword', 'page', 'limit']
+    removeFields.forEach((key) => delete queryString[key])
 
     // filter for price and rating range
     // adding $ in key for mongoose query like {"price":{"gt":"12000"}} => {"price":{"$gt":"12000"}}
-    queryString = JSON.stringify(queryString);
+    queryString = JSON.stringify(queryString)
     queryString = queryString.replace(
       /\b(gt|gte|lt|lte)\b/g,
       (key) => `$${key}`
-    );
+    )
 
-    queryString = JSON.parse(queryString);
-    this.query = this.query.find(queryString);
-    return this;
+    queryString = JSON.parse(queryString)
+    this.query = this.query.find(queryString)
+    return this
   }
 
   pagination(resultPerPage, currentPage) {
-    const skip = resultPerPage * (currentPage - 1);
+    const skip = resultPerPage * (currentPage - 1)
     this.query = this.query.limit(resultPerPage).skip(skip)
-    return this;
+    return this
   }
 }
 
-module.exports = ApiFeatures;
+module.exports = ApiFeatures

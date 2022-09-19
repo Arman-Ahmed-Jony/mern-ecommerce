@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const {
   registerUser,
   loginUser,
@@ -11,27 +11,27 @@ const {
   updateUser,
   getAllUsers,
   getSingleUser,
-} = require("../controllers/userController");
+} = require('../controllers/userController')
 
-const { isAuthenticated, authorizeRoles } = require("../middleware/auth");
+const { isAuthenticated, authorizeRoles } = require('../middleware/auth')
 
 // router.route("/products").get(getAllProducts)
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
-router.route("/logout").get(logout);
-router.route("/password/forgot").post(forgotPassword);
-router.route("/password/reset/:token").put(resetPassword);
+router.route('/register').post(registerUser)
+router.route('/login').post(loginUser)
+router.route('/logout').get(logout)
+router.route('/password/forgot').post(forgotPassword)
+router.route('/password/reset/:token').put(resetPassword)
 router
-  .route("/user/me")
+  .route('/user/me')
   .get(isAuthenticated, getUserDetails)
-  .put(isAuthenticated, updateUser);
-router.route("/password/change").put(isAuthenticated, changePassword);
+  .put(isAuthenticated, updateUser)
+router.route('/password/change').put(isAuthenticated, changePassword)
 
 router
-  .route("/admin/users")
-  .get(isAuthenticated, authorizeRoles("admin"), getAllUsers);
+  .route('/admin/users')
+  .get(isAuthenticated, authorizeRoles('admin'), getAllUsers)
 router
-  .route("/admin/users/:id")
-  .get(isAuthenticated, authorizeRoles("admin"), getSingleUser);
+  .route('/admin/users/:id')
+  .get(isAuthenticated, authorizeRoles('admin'), getSingleUser)
 
-module.exports = router;
+module.exports = router
