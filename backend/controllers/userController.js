@@ -200,13 +200,53 @@ exports.getAllUsers = catchAsyncFunction(async (req, res) => {
   })
 })
 
+// get single user details --ADMIN
 exports.getSingleUser = catchAsyncFunction(async (req, res, next) => {
   const user = await User.findById(req.params.id)
 
   if (!user) {
     return next(
-      new ErrorHandler(`user not found with id ${req.params.id}`, 404)
+      new ErrorHandler(404, `user not found with id ${req.params.id}`)
     )
   }
   res.status(200).json({ success: true, user })
+})
+
+// update single user details with user role --ADMIN
+exports.updateUserDetailsWithRole = catchAsyncFunction(
+  async (req, res, next) => {
+    const data = removeEmptyValue({
+      name: req.body.name,
+      email: req.body.email,
+      role: req.body.role,
+    })
+    const user = await User.findByIdAndUpdate(req.params.id, data, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    })
+    if (!user) {
+      return next(
+        new ErrorHandler(404, `user not found with id ${req.params.id}`)
+      )
+    }
+    res.status(200).json({
+      success: true,
+      user,
+    })
+  }
+)
+
+// delete single user --ADMIN
+exports.deleteUser = catchAsyncFunction(async (req, res, next) => {
+  const user = await User.findByIdAndDelete(req.params.id)
+  if (!user) {
+    return next(
+      new ErrorHandler(404, `user not found with id ${req.params.id}`)
+    )
+  }
+  res.status(200).json({
+    success: true,
+    user,
+  })
 })

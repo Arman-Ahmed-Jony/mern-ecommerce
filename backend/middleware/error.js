@@ -1,9 +1,9 @@
 const ErrorHandler = require('../utils/errorHandler')
 
-module.exports = (err, req, res) => {
+// eslint-disable-next-line no-unused-vars
+module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500
   err.message = err.message || 'Internal server error'
-  console.log(err)
   // handling mongodb id error(cast error)
   if (err.name === 'CastError') {
     const message = `resource not found. invalid: ${err.path}`

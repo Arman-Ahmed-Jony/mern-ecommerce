@@ -1,276 +1,554 @@
 {
-  "info": {
-    "_postman_id": "793d6ec7-6589-425a-bc20-933a035dd0b4",
-    "name": "mern ecommerce",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "7962312"
-  },
-  "item": [
-    {
-      "name": "Products",
-      "item": [
-        {
-          "name": "get all products",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{host}}/api/v1/products",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "products"],
-              "query": [
-                {
-                  "key": "keyword",
-                  "value": "new name",
-                  "disabled": true
-                },
-                {
-                  "key": "category",
-                  "value": "Laptop",
-                  "disabled": true
-                },
-                {
-                  "key": "price[gte]",
-                  "value": "1200",
-                  "disabled": true
-                },
-                {
-                  "key": "page",
-                  "value": "2",
-                  "disabled": true
-                },
-                {
-                  "key": "resultPerPage",
-                  "value": "2",
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "create product",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"new name 8\",\n    \"description\": \"test description\",\n    \"category\": \"laptop\",\n    \"price\": 1200 \n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/products",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "products"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "update product",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"new name 1\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/products/62e95e88da5831937bb1a53d",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "products", "62e95e88da5831937bb1a53d"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "delete product",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"new name 1\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/products/62e95faa6d889f39e8b2fe6b",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "products", "62e95faa6d889f39e8b2fe6b"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "get product details",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"new name 1\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/products/62e95faa6d889f39e8b2fe6b",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "products", "62e95faa6d889f39e8b2fe6b"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Users",
-      "item": [
-        {
-          "name": "register user",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"arman\",\n    \"email\": \"ada@gmail.com\",\n    \"password\": \"12345678\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/register",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "register"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "login user",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"armanahmedjony@gmail.com\",\n    \"password\": \"sadia123\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/login",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "logout",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/logout",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "logout"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "forgot password",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"armanahmedjony@gmail.com\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/password/forgot",
-              "host": ["{{host}}"],
-              "path": ["api", "v1", "password", "forgot"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "reset password",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"armanahmedjony@gmail.com\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{host}}/api/v1/password/reset/cbf33f65c8589941a9934a66574d53bf66a705ca",
-              "host": ["{{host}}"],
-              "path": [
-                "api",
-                "v1",
-                "password",
-                "reset",
-                "cbf33f65c8589941a9934a66574d53bf66a705ca"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "host",
-      "value": "http://localhost:4000"
-    }
-  ]
+	"info": {
+		"_postman_id": "793d6ec7-6589-425a-bc20-933a035dd0b4",
+		"name": "mern ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7962312"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "new name",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "Laptop",
+									"disabled": true
+								},
+								{
+									"key": "price[gte]",
+									"value": "1200",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "resultPerPage",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product --ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new name 8\",\n    \"description\": \"test description\",\n    \"category\": \"laptop\",\n    \"price\": 1200 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product --ADMIN",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new name 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/products/62e95e88da5831937bb1a53d",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"products",
+								"62e95e88da5831937bb1a53d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new name 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/products/62e95faa6d889f39e8b2fe6b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"products",
+								"62e95faa6d889f39e8b2fe6b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"new name 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/products/62e95faa6d889f39e8b2fe6b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"62e95faa6d889f39e8b2fe6b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"arman\",\n    \"email\": \"ada@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"armanahmedjony@gmail.com\",\n    \"password\": \"sadia111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get my user info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/user/me",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update my user info",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"arman ahmed\",\n    \"email\": \"armanahmedjony@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/user/me",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"armanahmedjony@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/password/forgot",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"password",
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"sadia123\",\n    \"confirmPassword\": \"sadia123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/password/reset/b7d6bca02be06f24404a65a337a22377c24a517d",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"password",
+								"reset",
+								"b7d6bca02be06f24404a65a337a22377c24a517d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"sadia123\",\n    \"newPassword\": \"sadia111\",\n    \"confirmPassword\": \"sadia111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/password/change",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"password",
+								"change"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users --ADMIN",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get single user details --ADMIN",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/users/63150c1467fa43cc35ee4120",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"users",
+								"63150c1467fa43cc35ee4120"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user with ROLE --ADMIN",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"arman ahmed\",\n    \"role\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/users/63150c1467fa43cc35ee4120",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"users",
+								"63150c1467fa43cc35ee4120"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get single user details --ADMIN Copy 2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/users/63150c1467fa43cc35ee4120",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"users",
+								"63150c1467fa43cc35ee4120"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:4000"
+		}
+	]
 }
