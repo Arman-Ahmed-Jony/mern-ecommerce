@@ -71,3 +71,40 @@ exports.deleteProduct = catchAsyncFunction(async (req, res, next) => {
     message: 'product deleted successfully',
   })
 })
+
+// create new review/ update existing review
+exports.review = catchAsyncFunction(async (req, res, next) => {
+  const { rating, comment } = req.body
+  const { id: productId } = req.params
+  const review = {
+    createdBy: req.user.id,
+    name: req.user.name,
+    rating: Number(rating),
+    comment,
+  }
+
+  const product = await Product.findById(productId)
+  const alreadyReviewedByUserIndex = product.reviews.findIndex(
+    (rev) => rev.createdBy.toString() === req.user.id
+  )
+
+  console.log(alreadyReviewedByUserIndex)
+  if (~alreadyReviewedByUserIndex) {
+    // review available of that user than it will update the review
+    product.reviews[alreadyReviewedByUserIndex] = review
+  } else {
+    // review create
+    product.reviews.push(review)
+    product.numOfReviews++
+  }
+  product.rating =
+    product.reviews.reduce((acc, cur) => {
+      return (acc += cur.rating)
+    }, 0) / product.numOfReviews
+  await product.save({ validateBeforeSave: false })
+  res.status(200).json({
+    success: true,
+    message: 'product review saved successfully',
+    product,
+  })
+})
