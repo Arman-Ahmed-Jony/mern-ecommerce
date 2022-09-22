@@ -73,7 +73,7 @@ exports.deleteProduct = catchAsyncFunction(async (req, res, next) => {
 })
 
 // create new review/ update existing review
-exports.review = catchAsyncFunction(async (req, res, next) => {
+exports.review = catchAsyncFunction(async (req, res) => {
   const { rating, comment } = req.body
   const { id: productId } = req.params
   const review = {
@@ -87,8 +87,6 @@ exports.review = catchAsyncFunction(async (req, res, next) => {
   const alreadyReviewedByUserIndex = product.reviews.findIndex(
     (rev) => rev.createdBy.toString() === req.user.id
   )
-
-  console.log(alreadyReviewedByUserIndex)
   if (~alreadyReviewedByUserIndex) {
     // review available of that user than it will update the review
     product.reviews[alreadyReviewedByUserIndex] = review
@@ -107,4 +105,48 @@ exports.review = catchAsyncFunction(async (req, res, next) => {
     message: 'product review saved successfully',
     product,
   })
+})
+
+exports.getAllReviewsByProductId = catchAsyncFunction(
+  async (req, res, next) => {
+    const productId = req.params.id
+
+    const product = await Product.findById(productId)
+    if (!product) {
+      return next(new ErrorHandler(404, 'product not found'))
+    }
+    res.status(200).json({
+      success: true,
+      reviews: product.reviews,
+    })
+  }
+)
+
+exports.deleteReviewById = catchAsyncFunction(async (req, res, next) => {
+  const productId = req.params.id
+  const reviewId = req.params.reviewId
+  const product = await Product.findById(productId)
+  if (!product) {
+    return next(new ErrorHandler(404, 'product not found'))
+  }
+  const reviews = product.reviews.filter(
+    (review) => review._id.toString() !== reviewId.toString()
+  )
+  const numberOfReviews = reviews.length
+  // * note: number of reviews may become zero and rating dividing by zero will give NaN
+  const rating = !numberOfReviews
+    ? 0
+    : reviews.reduce((acc, cur) => {
+        return (acc += cur.rating)
+      }, 0) / numberOfReviews
+
+  await Product.findByIdAndUpdate(productId, {
+    reviews,
+    numberOfReviews,
+    rating,
+  })
+
+  res
+    .status(200)
+    .json({ success: true, message: 'review deleted successfully' })
 })
