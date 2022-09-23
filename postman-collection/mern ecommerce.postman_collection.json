@@ -561,7 +561,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"arman@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"email\": \"armanahmedjony@gmail.com\",\n    \"password\": \"sadia111\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -636,6 +636,39 @@
 								"api",
 								"v1",
 								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shippingInfo\": {\n        \"address\": \"ashkona, dakkhinkhan\",\n        \"city\": \"dhaka\",\n        \"state\" : \"dhaka\",\n        \"country\": \"Bnagladesh\",\n        \"pinCode\": 1230,\n        \"phoneNo\": 1906402798\n    },\n    \"orderItems\": [{\n        \"name\": \"product20\",\n        \"price\": 200,\n        \"quantity\": 2,\n        \"image\": \"image url\",\n        \"product\": \"62e97326660dc814563363f7\"\n    }],\n    \"paymentInfo\": {\n        \"id\": \"simple payment info id\",\n        \"status\": \"succeeded\"\n    },\n    \"itemsPrice\": 400,\n    \"taxPrice\": 96,\n    \"shippingPrice\": 100,\n    \"totalPrice\": 596\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
 							]
 						}
 					},
