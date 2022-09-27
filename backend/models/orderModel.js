@@ -97,7 +97,7 @@ const OrderScema = new mongoose.Schema({
     default: Date.now,
   },
   createdBy: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
   },

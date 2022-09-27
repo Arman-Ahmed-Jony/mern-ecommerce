@@ -15,5 +15,4 @@ const connectDatabase = () => {
     })
   mongoose.set('debug', true)
 }
-
 module.exports = connectDatabase
