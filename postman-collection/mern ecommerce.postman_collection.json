@@ -620,7 +620,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"arman\",\n    \"email\": \"ada@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"name\": \"test user\",\n    \"email\": \"test.user@gmail.com\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -653,6 +653,98 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
+							"raw": "{\n    \"shippingInfo\": {\n        \"address\": \"test, dakkhinkhan\",\n        \"city\": \"dhaka\",\n        \"state\" : \"dhaka\",\n        \"country\": \"Bnagladesh\",\n        \"pinCode\": 1230,\n        \"phoneNo\": 1906402798\n    },\n    \"orderItems\": [{\n        \"name\": \"product20\",\n        \"price\": 200,\n        \"quantity\": 2,\n        \"image\": \"image url\",\n        \"product\": \"62e97326660dc814563363f7\"\n    }],\n    \"paymentInfo\": {\n        \"id\": \"simple payment info id\",\n        \"status\": \"succeeded\"\n    },\n    \"itemsPrice\": 400,\n    \"taxPrice\": 96,\n    \"shippingPrice\": 100,\n    \"totalPrice\": 596\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get my orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete order --admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/orders/6334aa4323c7ef4d7fc153a1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"orders",
+								"6334aa4323c7ef4d7fc153a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get single order --admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
 							"raw": "{\n    \"shippingInfo\": {\n        \"address\": \"ashkona, dakkhinkhan\",\n        \"city\": \"dhaka\",\n        \"state\" : \"dhaka\",\n        \"country\": \"Bnagladesh\",\n        \"pinCode\": 1230,\n        \"phoneNo\": 1906402798\n    },\n    \"orderItems\": [{\n        \"name\": \"product20\",\n        \"price\": 200,\n        \"quantity\": 2,\n        \"image\": \"image url\",\n        \"product\": \"62e97326660dc814563363f7\"\n    }],\n    \"paymentInfo\": {\n        \"id\": \"simple payment info id\",\n        \"status\": \"succeeded\"\n    },\n    \"itemsPrice\": 400,\n    \"taxPrice\": 96,\n    \"shippingPrice\": 100,\n    \"totalPrice\": 596\n}",
 							"options": {
 								"raw": {
@@ -661,14 +753,78 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/order",
+							"raw": "{{host}}/api/v1/admin/orders/6334a6ed7137e52c1c119232",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"order"
+								"admin",
+								"orders",
+								"6334a6ed7137e52c1c119232"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all orders --admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order status delivered by id --admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"Delivered\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/admin/orders/6334aa4323c7ef4d7fc153a1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"orders",
+								"6334aa4323c7ef4d7fc153a1"
 							]
 						}
 					},

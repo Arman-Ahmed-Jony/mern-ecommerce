@@ -62,8 +62,12 @@ exports.getSingleOrder = catchAsyncFunction(async (req, res, next) => {
 // update order status --admin
 exports.updateOrderStatus = catchAsyncFunction(async (req, res, next) => {
   const order = await Order.findById(req.params.id)
-
-  if (!order.orderStatus === 'Delivered') {
+  if (!order) {
+    return next(
+      new ErrorHandler(404, `Order not found with id : ${req.params.id}`)
+    )
+  }
+  if (req.body.status === 'Delivered') {
     return next(new ErrorHandler(404, `you have already delivered the order`))
   }
 
@@ -79,6 +83,7 @@ exports.updateOrderStatus = catchAsyncFunction(async (req, res, next) => {
   res.status(200).json({
     message: `Order ${order.id} has been updated successfully`,
     success: true,
+    order,
   })
 })
 
