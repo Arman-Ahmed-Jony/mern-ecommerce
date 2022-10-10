@@ -1,0 +1,31 @@
+#footer {
+  display: flex;
+  margin-top: 2vmax;
+  color: aliceblue;
+  background-color: rgb(51, 50, 50);
+  font-family: 'Roboto';
+  padding: 2vmax;
+  flex-flow: row wrap;
+  align-items: stretch;
+}
+#footer .rightFooter,
+#footer .leftFooter,
+#footer .middleFooter {
+  min-width: 100px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+#footer > .rightFooter > .social-links {
+  display: flex;
+  color: rgb(29, 158, 94);
+  flex-grow: 1;
+}
+
+#footer > .rightFooter > .social-links > a {
+  color: inherit;
+  padding: 5px;
+}
+
+#footer > .middleFooter > h3 {
+  color: rgb(172, 43, 43);
+}
