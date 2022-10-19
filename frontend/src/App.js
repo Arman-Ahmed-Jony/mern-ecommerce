@@ -1,10 +1,10 @@
 import './App.css'
-import Header from './components/layout/Header/Header.js'
+import Header from './layout/Header/Header.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import WebFont from 'webfontloader'
-import Footer from './components/layout/Footer/Footer'
-import Home from './components/Home/Home'
+import Footer from './layout/Footer/Footer'
+import Home from './modules/Home'
 function App() {
   useEffect(() => {
     WebFont.load({
