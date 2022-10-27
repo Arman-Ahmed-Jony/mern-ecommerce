@@ -1,0 +1,29 @@
+.product-container {
+  text-decoration: none;
+  color: black;
+  width: 30vmax;
+  transition: all 0.3s;
+  margin: 10px;
+}
+.product-container > img {
+  width: 100%;
+}
+
+.product-container > p,
+.product-container > div {
+  margin: 10px;
+}
+.product-container > .review {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.price {
+  font-weight: 900;
+  font-size: larger;
+}
+
+.product-container:hover {
+  box-shadow: 0 0 10px rgba(15, 15, 15, 0.5);
+}
