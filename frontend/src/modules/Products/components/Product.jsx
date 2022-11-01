@@ -14,7 +14,7 @@ function Product({
   price,
 }) {
   useEffect(() => {
-    console.log(style)
+    
   }, [])
   const options = {
     count: 5,
