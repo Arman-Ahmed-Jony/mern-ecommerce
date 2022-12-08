@@ -12,6 +12,7 @@ function Product({
   ratingChanged,
   noOfReviews,
   price,
+  rating
 }) {
   useEffect(() => {
     
@@ -25,7 +26,7 @@ function Product({
     fullIcon: <i className="fa fa-star"></i>,
     isHalf: true,
     edit: false,
-    value: 2.5,
+    value: rating,
     activeColor: '#0ac43e',
   }
   return (
