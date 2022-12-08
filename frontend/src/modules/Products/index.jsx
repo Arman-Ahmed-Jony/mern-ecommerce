@@ -2,10 +2,11 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Product from './components/Product'
-
+import axios from 'axios'
 function Products() {
   const [products, setProducts] = useState([])
   const getProducts = () => {
+    axios.get('http://localhost:4000/api/v1/products')
     setProducts([
       {
         _id: 1,
