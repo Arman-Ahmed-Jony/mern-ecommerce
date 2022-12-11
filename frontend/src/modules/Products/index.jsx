@@ -3,15 +3,20 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import Product from './components/Product'
 import { getProducts } from '../../store/actions/productAction'
-import {useSelector, useDispatch} from 'react-redux'
-function Products() {
-  const dispatch = useDispatch()
-  const {products} = useSelector(state => state.products)
+import { useSelector, useDispatch } from 'react-redux'
+import { useAlert } from 'react-alert'
 
+function Products() {
+  const alert = useAlert()
+  const dispatch = useDispatch()
+  const {products, loading, total, error} = useSelector(state => state.products)
 
   useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch])
+    if (error) {
+      return alert.error(error)
+    }
+    dispatch(getProducts({resultPerPage: '4'}))
+  }, [dispatch, error, alert])
   return (
     <div
       style={{
@@ -20,12 +25,12 @@ function Products() {
         justifyContent: 'flex-start',
       }}
     >
-      {products.map((product, index) => (
+      { loading ? <h1>loading...</h1> : products?.map((product, index) => (
         <Product
           id={product._id}
           title={product.name}
           description={product.description}
-          img={{ src: 'https://source.unsplash.com/featured/400X400/?product' }}
+          img={{ src: 'https://source.unsplash.com/featured/200/?product' }}
           price={product.price}
           rating={product.rating}
           noOfReviews={product.numOfReviews}
