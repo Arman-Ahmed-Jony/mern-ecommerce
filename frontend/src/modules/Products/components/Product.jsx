@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
 import ReactStars from 'react-rating-stars-component'
-import { Link } from 'react-router-dom'
 import style from '../style.module.css'
 
 function Product({
@@ -30,7 +29,7 @@ function Product({
     activeColor: '#0ac43e',
   }
   return (
-    <Link to={id} className={style['product-container']}>
+    <div className={style['product-container']}>
       <img src={img.src} alt="product images" width="400px" />
       <p>{title}</p>
       <p>{description}</p>
@@ -38,7 +37,7 @@ function Product({
         <ReactStars {...options} /> ({noOfReviews} reviews)
       </div>
       <p className={style.price}>{price} ৳</p>
-    </Link>
+    </div>
   )
 }
 

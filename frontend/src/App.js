@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import WebFont from 'webfontloader'
 import Footer from './layout/Footer/Footer'
 import Home from './modules/Home'
+import ProductDetails from './modules/Products/ProductDetails'
 function App() {
   useEffect(() => {
     WebFont.load({
@@ -19,6 +20,7 @@ function App() {
       <div style={{ marginTop: '120px' }}></div>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/products/:id" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </Router>
