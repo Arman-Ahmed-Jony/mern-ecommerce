@@ -23,11 +23,11 @@ export const getProducts = (criteria = {}) => async (dispatch) => {
     })
   }
 }
+
 export const getProductDetails = (id ,criteria = {}) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
-
-    const { data } = await axios.get(`/api/v1/products/${id}${objectToApiQuaryString(criteria)}`)
+    const { data} = await axios.get(`/api/v1/products/${id}${objectToApiQuaryString(criteria)}`)
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
@@ -36,7 +36,6 @@ export const getProductDetails = (id ,criteria = {}) => async (dispatch) => {
     })
   }
 }
-
 
 // clearing errors
 export const clearErrors = () => async (dispatch) => {
