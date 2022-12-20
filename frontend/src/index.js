@@ -1,3 +1,7 @@
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
@@ -12,15 +16,15 @@ const options = {
   timeout: 5000,
   offset: '30px',
   // you can also just use 'scale'
-  transition: transitions.SCALE
+  transition: transitions.SCALE,
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
   <AlertProvider template={AlertTemplate} {...options}>
-  <Provider store={store}>
-    <App />
+    <Provider store={store}>
+      <App />
     </Provider>
-    </AlertProvider>
+  </AlertProvider>
 )

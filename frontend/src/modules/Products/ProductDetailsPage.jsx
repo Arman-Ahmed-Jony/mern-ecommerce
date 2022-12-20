@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProductDetails } from '../../store/actions/productAction'
+import ProductDetailsCard from './components/ProductDetailsCard'
 
 function ProductDetails() {
   const dispatch = useDispatch()
@@ -17,7 +18,8 @@ function ProductDetails() {
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <div>
+          <div>
+            <ProductDetailsCard/>
           <p>id: {product._id}</p>
           <p>name: {product.name}</p>
           <p>name: {product.description}</p>
