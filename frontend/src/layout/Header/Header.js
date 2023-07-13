@@ -33,6 +33,7 @@ function Header() {
       searchIcon
       SearchIconElement={BsSearch}
       profileIcon
+      profileIconUrl="./auth"
       ProfileIconElement={BsApp}
       cartIcon
       CartIconElement={BsCardText}
