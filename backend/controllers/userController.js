@@ -4,13 +4,23 @@ const User = require('../models/userModel')
 const sendJWTToken = require('../utils/sendJWTToken')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
+const cloudinary = require('cloudinary')
 const { removeEmptyValue } = require('../utils/utilities')
 
 /**
  * @name registerUser
  * @description registers a user and sends a token to
  */
-exports.registerUser = catchAsyncFunction(async (req, res) => {
+exports.registerUser = catchAsyncFunction(async (req, res, next) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return next(new ErrorHandler(400, 'No files were uploaded. Try uploading an image'))
+  }
+  const uploadFile = req.files.avatar;
+  const myCloud = await cloudinary.v2.uploader.upload(uploadFile.tempFilePath, {
+    folder: 'avatar',
+    width: 150,
+    crop: 'scale'
+  })
   const { name, email, password } = req.body
 
   const user = await User.create({
@@ -18,8 +28,8 @@ exports.registerUser = catchAsyncFunction(async (req, res) => {
     email,
     password,
     avatar: {
-      public_id: 'demo id',
-      url: 'demo url',
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
     },
   })
 
