@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import style from './style.module.css'
 
 function LoginSignUp() {
-  const [ showLogin, setShowLogin ] = useState(true)
+  const [showLogin, setShowLogin] = useState(true)
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  
 
   return (
     <>
@@ -11,9 +16,9 @@ function LoginSignUp() {
           {showLogin ? (
             <>
               <form className={style['register-form']}>
-                <input type="text" placeholder="name" />
-                <input type="password" placeholder="password" />
-                <input type="text" placeholder="email address" />
+                <input type="text" value={name} placeholder="name" />
+                <input type="password" value={password} placeholder="password" />
+                <input type="text" value={email} placeholder="email address" />
                 <button>create</button>
                 <p className={style['message']}>
                   Already registered?{' '}
@@ -24,8 +29,8 @@ function LoginSignUp() {
           ) : (
             <>
               <form className={style['login-form']}>
-                <input type="text" placeholder="username" />
-                <input type="password" placeholder="password" />
+                <input type="text" value={username} placeholder="username" />
+                <input type="password" value={password} placeholder="password" />
                 <button>login</button>
                 <p className={style['message']}>
                   Not registered?{' '}
