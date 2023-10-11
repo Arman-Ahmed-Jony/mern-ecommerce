@@ -60,7 +60,7 @@ exports.loginUser = catchAsyncFunction(async (req, res, next) => {
 
 exports.refreshToken = catchAsyncFunction(async (req, res, next) => {
   try {
-    const { email, refreshToken } = req.body
+    const { email, refreshToken } = req.cookies
     const {isValid, user} = await verifyRefreshToken(email, refreshToken);
     if (!isValid) {
       return next(new ErrorHandler(401, 'Session expired'))
@@ -76,7 +76,7 @@ exports.logout = catchAsyncFunction(async (req, res) => {
     expires: new Date(Date.now()),
     httpOnly: true,
   })
-  res.cookie('refresh-token', null, {
+  res.cookie('refreshToken', null, {
     expires: new Date(Date.now()),
     httpOnly: true,
   })

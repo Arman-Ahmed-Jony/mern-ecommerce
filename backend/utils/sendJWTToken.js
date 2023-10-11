@@ -11,8 +11,8 @@ module.exports = function (statusCode, user, res) {
   }
 
   res.status(statusCode).cookie('token', token, options)
-    .cookie('refresh-token', refreshToken)
-    .cookie('email', user.email)
+    .cookie('refreshToken', refreshToken, options)
+    .cookie('email', user.email, options)
     .json({
     success: true,
     user,
