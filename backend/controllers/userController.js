@@ -6,6 +6,7 @@ const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
 const cloudinary = require('cloudinary')
 const { removeEmptyValue } = require('../utils/utilities')
+const { verifyRefreshToken } = require('../middleware/auth')
 
 /**
  * @name registerUser
@@ -57,8 +58,29 @@ exports.loginUser = catchAsyncFunction(async (req, res, next) => {
   sendJWTToken(200, user, res)
 })
 
+exports.refreshToken = catchAsyncFunction(async (req, res, next) => {
+  try {
+    const { email, refreshToken } = req.body
+    const {isValid, user} = await verifyRefreshToken(email, refreshToken);
+    if (!isValid) {
+      return next(new ErrorHandler(401, 'Session expired'))
+    }
+    sendJWTToken(200, user, res)
+  } catch (error) {
+    return next(new ErrorHandler(401, 'Session expired'))
+  }
+})
+
 exports.logout = catchAsyncFunction(async (req, res) => {
   res.cookie('token', null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  })
+  res.cookie('refresh-token', null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  })
+  res.cookie('user', null, {
     expires: new Date(Date.now()),
     httpOnly: true,
   })

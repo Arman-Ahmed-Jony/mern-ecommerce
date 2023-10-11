@@ -5,8 +5,11 @@ const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
-
-app.use(cors())
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+};
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }))

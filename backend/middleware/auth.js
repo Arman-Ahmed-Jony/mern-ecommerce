@@ -14,6 +14,17 @@ exports.isAuthenticated = catchAsyncErrors(async (req, res, next) => {
   next()
 })
 
+exports.verifyRefreshToken = async (email, token) => { 
+  try {
+    const decoded = JWT.verify(token, process.env.JWT_REFRESH_KEY);
+    const user = await User.findById(decoded.id)
+    return Promise.resolve({ isValid: email === user.email, user: user})
+   } catch (error) {
+    console.error(error);
+    return Promise.reject({ isValid: false, user: null})
+   }
+}
+
 exports.authorizeRoles = function (...roles) {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {

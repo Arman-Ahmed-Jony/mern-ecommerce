@@ -54,6 +54,11 @@ userSchema.methods.getJWTToken = function () {
     expiresIn: process.env.JWT_EXPIRE,
   })
 }
+userSchema.methods.getRefreshToken = function () {
+  return JWT.sign({ id: this._id }, process.env.JWT_REFRESH_KEY, {
+    expiresIn: process.env.JWT_REFRESH_EXPIRE,
+  })
+}
 
 userSchema.methods.comparePassword = async function (enterendPassword) {
   return await bcryptjs.compare(enterendPassword, this.password)
