@@ -19,15 +19,15 @@ exports.createProduct = catchAsyncFunction(async (req, res) => {
 exports.getAllProducts = catchAsyncFunction(async (req, res) => {
   const total = await Product.countDocuments()
   const resultPerPage = Number(req.query.resultPerPage) || 5
-  const currentPage = Number(req.query.page) || 1
+  const page = Number(req.query.page) || 1
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resultPerPage, currentPage)
+    .pagination(resultPerPage, page)
   const products = await apiFeature.query
   res
     .status(200)
-    .json({ success: true, products, resultPerPage, currentPage, total })
+    .json({ success: true, products, resultPerPage, page, total })
 })
 
 // get product details

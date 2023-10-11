@@ -48,8 +48,8 @@ class ApiFeatures {
     return this
   }
 
-  pagination(resultPerPage, currentPage) {
-    const skip = resultPerPage * (currentPage - 1)
+  pagination(resultPerPage, page) {
+    const skip = resultPerPage * (page - 1)
     this.query = this.query.limit(resultPerPage).skip(skip)
     return this
   }
