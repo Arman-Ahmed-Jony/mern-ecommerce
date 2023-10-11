@@ -80,7 +80,7 @@ exports.logout = catchAsyncFunction(async (req, res) => {
     expires: new Date(Date.now()),
     httpOnly: true,
   })
-  res.cookie('user', null, {
+  res.cookie('email', null, {
     expires: new Date(Date.now()),
     httpOnly: true,
   })

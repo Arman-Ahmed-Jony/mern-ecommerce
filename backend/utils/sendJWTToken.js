@@ -12,7 +12,7 @@ module.exports = function (statusCode, user, res) {
 
   res.status(statusCode).cookie('token', token, options)
     .cookie('refresh-token', refreshToken)
-    .cookie('user', JSON.stringify({email: user.email, name: user.name, avatar: user.avatar, role: user.role, _id: user._id}))
+    .cookie('email', user.email)
     .json({
     success: true,
     user,
