@@ -16,7 +16,7 @@ const router = express.Router()
 
 router.route('/products').get(isAuthenticated, getAllProducts)
 router.route('/products/:id').get(getProductDetails)
-router.route('/products/:id/upload').post(uploadProductImage)
+router.route('/products/:id/upload').post(isAuthenticated, authorizeRoles('admin'), uploadProductImage)
 router
   .route('/products/:id/review')
   .get(getAllReviewsByProductId)
