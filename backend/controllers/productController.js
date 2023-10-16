@@ -2,6 +2,7 @@ const Product = require('../models/productModel')
 const ErrorHandler = require('../utils/errorHandler')
 const catchAsyncFunction = require('../middleware/catchAsyncErrors')
 const ApiFeatures = require('../utils/ApiFeatures')
+const { upload } = require('../utils/fileUpload')
 
 // create product -- admin
 exports.createProduct = catchAsyncFunction(async (req, res) => {
@@ -149,4 +150,22 @@ exports.deleteReviewById = catchAsyncFunction(async (req, res, next) => {
   res
     .status(200)
     .json({ success: true, message: 'review deleted successfully' })
+})
+
+exports.uploadProductImage = catchAsyncFunction(async (req, res, next) => { 
+  try {
+    let product = await Product.findById(req.params.id)
+    if (!product) {
+      return next(new ErrorHandler(404, 'product not found'))
+    }
+    const uploadedImage = await upload(req.files.image)
+    product.images.push({
+      public_id: 'none',
+      url: `${req.protocol}://${req.hostname}:${req.socket.localPort}${uploadedImage}`,
+    })
+    product = await Product.findByIdAndUpdate(req.params.id, { images: product.images }, {new: true})
+    res.status(200).json({ success: true, product })
+  } catch (error) {
+    res.status(500).json({ success: false, message: `${error}` })
+  }
 })

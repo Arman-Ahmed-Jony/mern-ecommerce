@@ -8,6 +8,7 @@ const {
   review,
   getAllReviewsByProductId,
   deleteReviewById,
+  uploadProductImage,
 } = require('../controllers/productController')
 const { isAuthenticated, authorizeRoles } = require('../middleware/auth')
 
@@ -15,6 +16,7 @@ const router = express.Router()
 
 router.route('/products').get(isAuthenticated, getAllProducts)
 router.route('/products/:id').get(getProductDetails)
+router.route('/products/:id/upload').post(uploadProductImage)
 router
   .route('/products/:id/review')
   .get(getAllReviewsByProductId)

@@ -9,13 +9,15 @@ const corsOptions = {
   origin: process.env.FRONTEND_URL,
   credentials: true
 };
+app.use(express.static('backend/public'));
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(fileUpload({
   useTempFiles : true,
-  tempFileDir : '/tmp/'
+  tempFileDir: '/tmp/',
+  createParentPath: true,
 }))
 // routes import
 const order = require('./routes/orderRoute')
