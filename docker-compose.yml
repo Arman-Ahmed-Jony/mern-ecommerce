@@ -1,0 +1,71 @@
+
+version: '3.9'
+services:
+  node:
+    # Creating a custom image
+    build: .
+    ports:
+        # External port:Internal port
+      - 4000:4000
+    volumes:
+      - .:/server
+    # volumes:
+      # Syntax <nameOfVolume>:<directorInDocker>
+      # - nodeVolume:/server
+      # - ./server # Adding the read-only option
+      # - /server/node_modules
+    # ADD THE CONFIGURATION FROM THIS POINT to build the MongoDB service
+    environment:
+      PORT: 4000
+      DB_URI: mongodb://mongo_db:27017/mern-ecommerce
+      JWT_SECRET_KEY: example
+      JWT_REFRESH_KEY: example
+      JWT_EXPIRE: 2m
+      JWT_REFRESH_EXPIRE: 2d
+      COOKIE_EXPIRE: 2
+
+      FRONTEND_URL: http://localhost:9000
+
+      SMTP_SERVICE: 
+      SMTP_MAIL: contact@a2-j.com
+      SMTP_PASSWORD: E95AR_6yr3A2R.n
+      SMTP_OUTGOING_PORT: 465
+      SMTP_HOST: mail.a2-j.com
+
+      MAIL_TRAP_SERVICE: 
+      MAIL_TRAP_MAIL: 159d69649f1703
+      MAIL_TRAP_PASSWORD: 7b36f92448bb75
+      MAIL_TRAP_OUTGOING_PORT: 2525
+      MAIL_TRAP_HOST: sandbox.smtp.mailtrap.io
+
+      CLOUDINARY_CLOUD_NAME: duhyx1ucf
+      CLOUDINARY_API_KEY: 934734329487313
+      CLOUDINARY_API_SECRET: 6CfbUF1xKYj9F83NZaMPvAiUDms
+      # For security, specify a username and password as environmental variables
+      # Username for the mongo database
+      # - MONGO_INITDB_ROOT_USERNAME=mern
+      # Password for the mongo database
+      # - MONGO_INITDB_ROOT_PASSWORD=merndocker
+    # Enables the mongo service to start before the node service
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    container_name: db_container
+    # Official mongo image from docker.hub
+    image: mongo:6.0
+    restart: always
+    ports:
+      - 2717:27017
+    # environment:
+    #   # Username for the mongo database
+    #   - MONGO_INITDB_ROOT_USERNAME=mern
+    #   # Password for the mongo database
+    #   - MONGO_INITDB_ROOT_PASSWORD=merndocker
+    volumes:
+      # <nameOfVolume>:<directorInDocker>
+      - mongo_db:/data/db
+# Making the node service volume accessible to other services.
+volumes:
+  # Making the volume accessible by other containers
+  mongo_db: 
